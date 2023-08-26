@@ -40,7 +40,7 @@ const ContactForm = () => {
       addContact({
         id: shortid.generate(),
         name: names,
-        phone: phone,
+        number: phone,
       })
     );
     setNames('');

@@ -1,13 +1,11 @@
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { register } from '../../redux/operations';
 import { Btn, Label, MyStyledInput, SignUpForm } from './SingUp.styled';
-import { getUsers } from 'redux/Auth/Selector';
 import { Notify } from 'notiflix';
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const users = useSelector(getUsers);
 
   const formik = useFormik({
     initialValues: {
@@ -16,7 +14,15 @@ const SignUp = () => {
       password: '',
     },
     onSubmit: (value, { resetForm }) => {
-      dispatch(register(value));
+      dispatch(register(value))
+        .unwrap()
+        .then(() => Notify.success(`Congratulations ${formik.values.name}`))
+        .catch(e => {
+          console.log(e);
+          Notify.failure(
+            `This mail  ${formik.values.email} is already registered `
+          );
+        });
       resetForm();
     },
   });
@@ -54,9 +60,6 @@ const SignUp = () => {
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
-              error={
-                formik.touched.password && formik.errors.password ? true : false
-              }
             />
           </Label>
           <Btn type="submit">SignUp</Btn>

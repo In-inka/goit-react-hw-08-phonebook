@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Btn, Label, MyStyledInput, SignUpForm } from './LoginForm.styled';
 import { login } from 'redux/operations';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { Notify } from 'notiflix';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,13 @@ const LoginForm = () => {
       password: '',
     },
     onSubmit: (value, { resetForm }) => {
-      dispatch(login(value));
+      dispatch(login(value))
+        .unwrap()
+        .then(() => Notify.success(`Hello`))
+        .catch(e => {
+          console.log(e);
+          Notify.failure('You entered the wrong email or password');
+        });
       resetForm();
     },
   });

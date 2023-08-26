@@ -1,31 +1,34 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigation, Head } from './Header.styled';
+import { Navigation, Head, Btn, Logo, LogIn } from './Header.styled';
 import { logout } from 'redux/operations';
-import {
-  getUsers,
-  getUsersName,
-  getUsersisLoggenIn,
-} from 'redux/Auth/Selector';
+import { getIsLoggedIn, getUsers } from 'redux/Auth/Selector';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUsers);
-  const isLoggenIn = useSelector(getUsersisLoggenIn);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
-  console.log(user.name);
+  const navigate = useNavigate();
   return (
     <Head>
       <Navigation>
-        <Link aria-current="page" to="/">
-          Home
-        </Link>
-        {isLoggenIn && <Link to="/contacts">My contacts</Link>}
-        {!isLoggenIn && <Link to="/singUp">SingUp</Link>}
-        {!isLoggenIn && <Link to="/login">Login</Link>}
-        {isLoggenIn && <h2>User: {user.name}</h2>}
-        <button type="button" onClick={() => dispatch(logout())}>
-          logout
-        </button>
+        <Logo>PHONEBOOK</Logo>
+        <LogIn>
+          {isLoggedIn && <Logo>User: {user.name}</Logo>}
+          {!isLoggedIn && (
+            <Btn type="button" onClick={() => navigate('/signUp')}>
+              Sign Up
+            </Btn>
+          )}
+
+          <Btn
+            type="button"
+            onClick={() => (isLoggedIn ? dispatch(logout()) : navigate('/'))}
+          >
+            {isLoggedIn ? 'Sing Out' : 'Sign In'}
+          </Btn>
+        </LogIn>
       </Navigation>
     </Head>
   );

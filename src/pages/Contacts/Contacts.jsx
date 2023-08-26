@@ -5,7 +5,7 @@ import Filter from 'components/Filter/Filter';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BarLoader } from 'react-spinners';
-import { getError, getIsLoading } from 'redux/Selectors';
+import { getError, getIsLoading } from 'redux/Contacts/Selectors';
 import { fetchContacts } from 'redux/operations';
 
 const Contacts = () => {
@@ -29,7 +29,6 @@ const Contacts = () => {
           data-testid="loader"
         />
       )}
-      <Title>Phonebook</Title>
       <ContactForm />
       <Title>Contacts</Title>
       <Filter />

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Form, Label, Input, Btn } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/Selectors';
+import { getContacts } from 'redux/Contacts/Selectors';
 import { Notify } from 'notiflix';
 
 const ContactForm = () => {

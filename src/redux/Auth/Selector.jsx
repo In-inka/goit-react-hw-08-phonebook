@@ -1,2 +1,4 @@
 export const getUsers = state => state.auth.user;
-export const getUsersisLoggenIn = state => state.auth.isLoggenIn;
+export const getIsLoggedIn = state => state.auth.isLoggedIn;
+
+export const getIsRefresh = state => state.auth.isRefresh;

@@ -23,18 +23,34 @@ export const Head = styled.header`
 
 export const Navigation = styled.nav`
   display: flex;
-  gap: 25px;
+  justify-content: space-between;
 `;
 
-export const Link = styled(NavLink)`
+export const LogIn = styled.div`
+  display: flex;
+  flex-wrap: no-wrap;
+  gap: 15px;
+`;
+
+export const Logo = styled.div`
   color: white;
   font-size: 25px;
   font-weight: bold;
+`;
+
+export const Btn = styled.button`
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: inherit;
 
   text-decoration: none;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 0.5);
   cursor: pointer;
   outline: none;
+  box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.12);
+  border-radius: 15px;
+  border-color: inherit;
 
   &:hover {
     transform: scale(1.08);

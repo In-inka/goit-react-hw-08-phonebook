@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { login, logout, refresh, register } from '../operations';
-
-const handleFulfilled = (state, { payload }) => {
-  state.token = payload.token;
-  state.user = payload.user;
-  state.isLoggenIn = true;
-};
+import {
+  handleFulfilled,
+  handleFulfilledLogout,
+  handleFulfilledRefresh,
+  handlePendingRefresh,
+  handleRejectedRefresh,
+} from './Handle/Handle';
 
 const initialState = {
   user: {
@@ -14,22 +15,8 @@ const initialState = {
     password: null,
   },
   token: null,
-  isLoggenIn: false,
-};
-
-const handleFulfilledLogout = state => {
-  state.user = {
-    name: null,
-    email: null,
-    password: null,
-  };
-  state.token = null;
-  state.isLoggenIn = false;
-};
-
-const handleFulfilledRefresh = (state, { payload }) => {
-  state.user = payload;
-  state.isLoggenIn = true;
+  isLoggedIn: false,
+  isRefresh: false,
 };
 
 const authSlice = createSlice({
@@ -39,7 +26,9 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, handleFulfilled)
       .addCase(login.fulfilled, handleFulfilled)
+      .addCase(refresh.pending, handlePendingRefresh)
       .addCase(refresh.fulfilled, handleFulfilledRefresh)
+      .addCase(refresh.rejected, handleRejectedRefresh)
       .addCase(logout.fulfilled, handleFulfilledLogout),
 });
 

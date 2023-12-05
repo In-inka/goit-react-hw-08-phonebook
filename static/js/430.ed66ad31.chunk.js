@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkphonebook=self.webpackChunkphonebook||[]).push([[430],{2430:function(n,e,o){o.r(e);o(2791);var u=o(184);e.default=function(){return(0,u.jsx)("div",{children:"404 Not Found"})}}}]);
+//# sourceMappingURL=430.ed66ad31.chunk.js.map

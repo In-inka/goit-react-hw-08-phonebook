@@ -38,6 +38,7 @@ export const Logo = styled.div`
 `;
 
 export const Btn = styled.button`
+  padding: 4px 10px;
   color: white;
   font-size: 25px;
   font-weight: bold;
@@ -49,7 +50,7 @@ export const Btn = styled.button`
   outline: none;
   box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.12);
   border-radius: 15px;
-  border-color: inherit;
+  border: none;
 
   &:hover {
     transform: scale(1.08);
